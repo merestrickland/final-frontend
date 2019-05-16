@@ -15,7 +15,7 @@ import {BrowserRouter, Switch, Route, Link, withRouter} from 'react-router-dom'
 // import TripContainer from './containers/TripContainer'
 
 
-
+// const store = createStore();
 
 class App extends Component {
 
@@ -32,7 +32,7 @@ class App extends Component {
       <div>
         <h1>Welcome to TripList</h1>
         <Header />
-      <Provider store={store}>
+      <Provider>
       
         <Switch>
           <Route path='/login' render={()=> <LoginForm setUser={this.setUser}/> } />
