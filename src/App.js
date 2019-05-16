@@ -1,21 +1,20 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import LoginForm from './components/LoginForm'
-import Header from './components/Header'
-
 //REDUX
 import {connect} from 'react-redux'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-// import {fetchTrips} from './Redux'
-
 //ROUTING
 import {BrowserRouter, Switch, Route, Link, withRouter} from 'react-router-dom'
+import LoginForm from './components/LoginForm'
+import Header from './components/Header'
+import TripContainer from './containers/TripContainer'
+// console.log(TripContainer)
 
-// import TripContainer from './containers/TripContainer'
 
 
-// const store = createStore();
+ 
+
+
 
 class App extends Component {
 
@@ -32,12 +31,12 @@ class App extends Component {
       <div>
         <h1>Welcome to TripList</h1>
         <Header />
-      <Provider>
-      
+        <TripContainer />
+      {/* <Provider>
         <Switch>
           <Route path='/login' render={()=> <LoginForm setUser={this.setUser}/> } />
         </Switch>
-        </Provider>
+        </Provider> */}
       </div>
     )
   }
