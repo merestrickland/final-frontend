@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import LoginForm from './components/LoginForm'
+import Header from './components/Header'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//REDUX
+import {connect} from 'react-redux'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+// import {fetchTrips} from './Redux'
+
+//ROUTING
+import {BrowserRouter, Switch, Route, Link, withRouter} from 'react-router-dom'
+
+// import TripContainer from './containers/TripContainer'
+
+
+
+
+class App extends Component {
+
+  setUser = (userInformation, token) => {
+    this.setState({
+      user: userInformation
+    })
+  }
+
+
+
+  render() {
+    return (
+      <div>
+        <h1>Welcome to TripList</h1>
+        <Header />
+      <Provider store={store}>
+      
+        <Switch>
+          <Route path='/login' render={()=> <LoginForm setUser={this.setUser}/> } />
+        </Switch>
+        </Provider>
+      </div>
+    )
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+
+})
+
+export default connect(mapStateToProps)(App);
