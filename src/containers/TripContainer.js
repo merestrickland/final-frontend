@@ -6,11 +6,11 @@ import {connect} from 'react-redux'
 
 
 function TripContainer(props) {
-  
   console.log(props)
-  props.trips.map(trip => {
-    return <Trip />
+  let eachTrip = props.trips.map(trip => {
+    return <Trip trip={trip}/>
   })
+  return eachTrip
 }
 
 
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
   //just want to return some parts of state
   //the key is the prop that we are creating
   return {
-    trips: state.trips
+    trips: state.trips,
   }
 }
 
