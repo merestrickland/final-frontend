@@ -6,7 +6,7 @@ class Trip extends Component {
   
   state = {
     wantToSend: false,
-    sending: false
+    sending: []
   }
 
 
@@ -14,8 +14,16 @@ class Trip extends Component {
     // console.log("hi")
     this.setState({
       wantToSend: !this.state.wantToSend
+    }) 
+  }
+
+  handleInputChange = (event) => {
+    console.log(event.target.value)
+    this.state.sending.includes(parseInt(event.target.value)) ? console.log('nerd') : this.setState({
+      sending: [...this.state.sending, parseInt(event.target.value)]
     })
     
+    console.log("this is state.sending once I click a user", this.state.sending)
   }
 
   listUsers = (props) => {
@@ -25,10 +33,13 @@ class Trip extends Component {
       return (
         <form>
           <label>
-            {"Send to:"}
+            {user.first_name + " " + user.last_name}
             <input
             name = {"sendTo"}
-            type={"checkbox"}/>
+            type={"checkbox"}
+            value={user.id}
+            onChange={(event) => {this.handleInputChange(event)}}/>
+            
           </label>
         </form>
         // <div>{user.first_name + " " + user.last_name}</div>
