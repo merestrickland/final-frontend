@@ -2,15 +2,27 @@ import React, { Component } from 'react'
 import Trip from '../components/Trip'
 // import TripForm from '../components/TripForm'
 import {connect} from 'react-redux'
+import {Switch, Route} from 'react-router-dom'
 
 
 
 function TripContainer(props) {
-  
   console.log(props)
-  props.trips.map(trip => {
-    return <Trip />
-  })
+  return(
+    <div>
+  <Switch>
+    <Route path="/trips" render={(props) => {
+      console.log(props)
+        let eachTrip = props.trips.map(trip => {
+          return <Trip trip={trip}/>
+        })
+        return eachTrip
+    }}/>
+  </Switch>
+  </div>
+  )
+  
+  
 }
 
 
@@ -21,7 +33,7 @@ const mapStateToProps = (state) => {
   //just want to return some parts of state
   //the key is the prop that we are creating
   return {
-    trips: state.trips
+    trips: state.trips,
   }
 }
 
