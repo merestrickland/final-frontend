@@ -4,11 +4,15 @@ import './App.css';
 import {connect} from 'react-redux'
 import { Provider } from 'react-redux'
 //ROUTING
-import {BrowserRouter, Switch, Route, Link, withRouter} from 'react-router-dom'
-import LoginForm from './components/LoginForm'
+import { Route, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import TripContainer from './containers/TripContainer'
+import Home from './containers/Home'
+import LoginForm from './components/LoginForm'
+import Error from './Error'
 // console.log(TripContainer)
+
+
 
 
 
@@ -17,6 +21,8 @@ import TripContainer from './containers/TripContainer'
 
 
 class App extends Component {
+
+
 
   setUser = (userInformation, token) => {
     this.setState({
@@ -29,9 +35,18 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>Welcome to TripList</h1>
-        <Header />
-        <TripContainer />
+        
+        {/* <Provider> */}
+          <Switch>
+            <Route path="/home" component={Home} />
+            <Route path="/login" component={LoginForm} />
+            <Route path="/trips" component={TripContainer} />
+            <Route path="/" component={Error} />
+            
+          </Switch>
+        {/* </Provider> */}
+        
+
       {/* <Provider>
         <Switch>
           <Route path='/login' render={()=> <LoginForm setUser={this.setUser}/> } />

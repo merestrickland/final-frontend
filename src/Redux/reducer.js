@@ -14,6 +14,20 @@ const initialState = {
             "name": "New York City",
             "coordinates": "40.7128, -74.0060"
           }
+        },
+        {
+          "id": 3,
+          "name": "Japan, Baby!",
+          "user": {
+            "id": 2,
+            "first_name": "Meredith",
+            "last_name": "Strickland"
+          },
+          "location": {
+            "id": 3,
+            "name": "Japan",
+            "coordinates": "40.7128, -74.0060"
+          }
         }
       ],
     users: [
