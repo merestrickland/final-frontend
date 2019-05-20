@@ -9,7 +9,10 @@ import Header from './components/Header'
 import TripContainer from './containers/TripContainer'
 import Home from './containers/Home'
 import LoginForm from './components/LoginForm'
+import RegisterForm from './components/RegisterForm'
 import Error from './Error'
+import UserSearch from './components/UserSearch'
+import ProfileContainer from './containers/ProfileContainer'
 // console.log(TripContainer)
 
 
@@ -22,9 +25,12 @@ import Error from './Error'
 
 class App extends Component {
 
+  state = {
+    user: {},
+    token: ""
+  }
 
-
-  setUser = (userInformation, token) => {
+   setUser = (userInformation, token) => {
     this.setState({
       user: userInformation
     })
@@ -33,25 +39,19 @@ class App extends Component {
 
 
   render() {
+    console.log("APP STATE", this.state)
+    // console.log("APP PROPS", this.props)
     return (
       <div>
-        
-        {/* <Provider> */}
           <Switch>
             <Route path="/home" component={Home} />
-            <Route path="/login" component={LoginForm} />
+            <Route path='/login' render={()=> <LoginForm setUser={this.setUser}/> } />
+            <Route path="/signup" render={()=> <RegisterForm /> } />
+            <Route path="/profile" render={()=> <ProfileContainer user={this.state.user} token={this.state.token} /> } />
             <Route path="/trips" component={TripContainer} />
+            <Route path="/users" component={UserSearch} />
             <Route path="/" component={Error} />
-            
           </Switch>
-        {/* </Provider> */}
-        
-
-      {/* <Provider>
-        <Switch>
-          <Route path='/login' render={()=> <LoginForm setUser={this.setUser}/> } />
-        </Switch>
-        </Provider> */}
       </div>
     )
   }

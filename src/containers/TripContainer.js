@@ -1,29 +1,68 @@
 import React, { Component } from 'react'
 import Trip from '../components/Trip'
+import TripShow from '../components/TripShow'
 // import TripForm from '../components/TripForm'
 import {connect} from 'react-redux'
-import {Switch, Route} from 'react-router-dom'
+import {Link, Switch, Route} from 'react-router-dom'
+import * as actionCreators from '../Redux/Action'
 
 
 
-function TripContainer(props) {
-  console.log(props)
-  return(
-    <div>
-  <Switch>
-    <Route path="/trips" render={(props) => {
-      console.log(props)
-        let eachTrip = props.trips.map(trip => {
-          return <Trip trip={trip}/>
-        })
-        return eachTrip
-    }}/>
-  </Switch>
-  </div>
-  )
-  
-  
+class TripContainer extends Component {
+
+  componentDidMount(){
+    this.props.getTripsCreator()
+  }
+
+  render() {
+    console.log(this.props)
+    return (
+      <div>
+        <Switch>
+          <Route path="/trips/:id" render={(props) => {
+            console.log("these are render props", props)
+           
+            //find the trip from props based on id
+            const foundTrip = this.props.trips.find(trip => {
+              return trip.id === parseInt(props.match.params.id)
+            })
+
+            if(foundTrip === undefined){
+              props.history.push("/")
+              return 
+            } else {
+              return (
+                
+                  <TripShow trip={foundTrip}/>
+              )
+            }
+
+          }} />
+
+
+
+
+
+
+          <Route path="/trips" render={(props) => {
+            return (
+              <div>
+                <h1>Trip Container</h1>
+                {this.props.trips.map(trip => 
+                  <Trip trip={trip}/>
+                )}
+              </div>
+            )
+          }}/>
+        </Switch>
+      </div>
+    )
+  }
 }
+
+
+
+
 
 
 const mapStateToProps = (state) => {
@@ -40,4 +79,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps)(TripContainer)
+export default connect(mapStateToProps, actionCreators)(TripContainer)

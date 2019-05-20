@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 // import {fetchLogIn} from '../Redux'
+import {Link} from 'react-router-dom'
 
 class LoginForm extends Component {
 
@@ -30,12 +31,13 @@ class LoginForm extends Component {
             })
         })
         .then(response => response.json())
-        .then((response) => this.props.setUser(response.user, response.token))
+        .then((response) => console.log(response) || this.props.setUser(response.user, response.token))
     }
 
 
 
   render() {
+      console.log("loginform props", this.props)
     return (
       <div>
           <h3>Log In</h3>
@@ -48,7 +50,9 @@ class LoginForm extends Component {
                 Password:
                 <input type="password" name="password" onChange={this.handleChange}/>
             </label>
+            <Link to={'/users'}>
             <input type="submit"/>
+            </Link>
           </form>
       </div>
     )

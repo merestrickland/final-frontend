@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch, Link } from 'react-router-dom'
 import LoginForm from '../components/LoginForm'
+import Header from '../components/Header'
 
 export default class Home extends Component {
   render() {
     return (
       <div>
-        <h1>This is Home Page</h1>
+        <Header />
+        <Link to={'/login'}>
+            <button>Log In</button>
+        </Link>
+        <Link to={'/signup'}>
+            <button>Sign Up</button>
+        </Link>
+        
         
       </div>
     )
