@@ -10,20 +10,56 @@ class UserSearch extends Component {
     }
 
 
+    handleChange = (event) => {
+      let userSearch = event.target.value.toLowerCase()
+      // console.log(userSearch)
+      
+      let userList = [...this.props.users]
+      
+      let newArr = userList.filter(user => {
+         return user.first_name.toLowerCase().includes(userSearch)
+      })
+      console.log(newArr)
+      this.props.filterUsers(newArr)
+    }
+
   render() {
-      console.log(this.props)
-    return (
-      <div>
-        <h2>User Search Page</h2>
-        <ul>
-        {this.props.users.map(user => {
-           return  <li>{user.first_name}</li>
+
+    console.log('user search props', this.props)
+      return (
+        <div>
+          <input onChange={this.handleChange} style={{ width: 500, height: 35,     borderRadius: '100px'}} type="text"
+            placeholder={"Search for a User"}/>
+        {this.props.filteredUsers.map(user => {
+          return (
+            <div>
+              <Switch>
+              {/* <Route path */}
+              <Route path="/users" render={(props) => {
+                   return (
+                    <Link to={`/users/${user.id}`}>
+                    <h2>{user.first_name}</h2>
+                    </Link>
+                   )     
+              }}/>
+              </Switch>
+            </div>
+
+
+
+
+
+
+           
+          )
         })}
-        </ul>
-      </div>
-    )
+        
+        </div>
+      )
   }
 }
+
+      
 
 
 const mapStateToProps = (state) => {
@@ -33,9 +69,12 @@ const mapStateToProps = (state) => {
     //just want to return some parts of state
     //the key is the prop that we are creating
     return {
-      users: state.users,
+      filteredUsers: state.filteredUsers,
+      users: state.users
     }
   }
+
+
 
 
 export default connect(mapStateToProps, actionCreators)(UserSearch)

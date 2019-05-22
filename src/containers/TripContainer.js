@@ -15,7 +15,7 @@ class TripContainer extends Component {
   }
 
   render() {
-    console.log(this.props)
+    console.log('trip props', this.props)
     return (
       <div>
         <Switch>
@@ -31,18 +31,11 @@ class TripContainer extends Component {
               props.history.push("/")
               return 
             } else {
-              return (
-                
-                  <TripShow trip={foundTrip}/>
+              return ( 
+                  <TripShow trip={foundTrip}/>  
               )
             }
-
           }} />
-
-
-
-
-
 
           <Route path="/trips" render={(props) => {
             return (

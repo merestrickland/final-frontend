@@ -4,7 +4,7 @@ import './App.css';
 import {connect} from 'react-redux'
 import { Provider } from 'react-redux'
 //ROUTING
-import { Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import TripContainer from './containers/TripContainer'
 import Home from './containers/Home'
@@ -13,6 +13,8 @@ import RegisterForm from './components/RegisterForm'
 import Error from './Error'
 import UserSearch from './components/UserSearch'
 import ProfileContainer from './containers/ProfileContainer'
+import UserShow from './components/UserShow'
+import NavBar from './components/NavBar'
 // console.log(TripContainer)
 
 
@@ -25,10 +27,10 @@ import ProfileContainer from './containers/ProfileContainer'
 
 class App extends Component {
 
-  state = {
-    user: {},
-    token: ""
-  }
+  // state = {
+  //   user: {},
+  //   token: ""
+  // }
 
    setUser = (userInformation, token) => {
     this.setState({
@@ -40,18 +42,24 @@ class App extends Component {
 
   render() {
     console.log("APP STATE", this.state)
-    // console.log("APP PROPS", this.props)
+    console.log("APP PROPS", this.props)
     return (
       <div>
-          <Switch>
+          {/* <Switch> */}
+          <BrowserRouter>
+            <Route path="/" component={NavBar} />
             <Route path="/home" component={Home} />
             <Route path='/login' render={()=> <LoginForm setUser={this.setUser}/> } />
             <Route path="/signup" render={()=> <RegisterForm /> } />
-            <Route path="/profile" render={()=> <ProfileContainer user={this.state.user} token={this.state.token} /> } />
+            <Route path="/profile" render={()=> <ProfileContainer user={this.state.currentUser} token={this.state.token} /> } />
             <Route path="/trips" component={TripContainer} />
-            <Route path="/users" component={UserSearch} />
-            <Route path="/" component={Error} />
-          </Switch>
+            <Route exact path="/users" component={UserSearch} />
+            <Route exact path="/users/:id" component={UserShow} />
+            
+            
+            <Route path="/404" component={Error} />
+          </BrowserRouter>
+          {/* </Switch> */}
       </div>
     )
   }

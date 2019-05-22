@@ -25,3 +25,28 @@ export const getUsersCreator = () => {
         .then(userArr => dispatch(getUsers(userArr)))
     }
 }
+
+export const filterUsers = (users) => ({
+    type: 'FILTER_USERS',
+    payload: users
+})
+
+export const fetchLogin = (currentUser) => dispatch => {
+    const user = {user:{
+        email: currentUser.email.toLowerCase(),
+        password: currentUser.password
+      }}
+    fetch("http://localhost:3005/api/v1/login", {
+        method: "POST",
+        headers: {
+            'content-type': 'application/json',
+            'accept': "application/json",
+        },
+        body: JSON.stringify(user)
+    })
+    .then(response => response.json())
+    .then((response) => {
+        console.log(response)
+        dispatch({type: "LOGIN", payload: response})
+    })
+}
