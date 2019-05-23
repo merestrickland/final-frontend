@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import {Route, Link, Switch} from 'react-router-dom'
 
 
 class Trip extends Component {
@@ -62,7 +63,9 @@ class Trip extends Component {
       // console.log(props.users)
       
         <div style={{"background-color": "gray"}}>
+          <Link to={`/trips/${trip.id}`}>
           <h1>{trip.name}</h1>
+          </Link>
           {this.state.wantToSend ? this.listUsers(this.props) : console.log('bloop') }
           <button onClick={() => this.clickToSend()}>
             ➡️

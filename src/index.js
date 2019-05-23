@@ -4,23 +4,27 @@ import './index.css';
 import App from './App';
 // import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom'
-
-import { createStore } from 'redux'
+import thunk from 'redux-thunk'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './Redux/reducer'
 
 
+// import semantic-ui-css/semantic.min.css
 
-// console.log(createStore)
-// console.log(reducer)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const middleware = [thunk]
+const store = createStore(
+  reducer, composeEnhancers(
+    applyMiddleware(...middleware)
+  ));
 
-let storeObj = createStore(reducer)
-// console.log('this is the storeObj', storeObj.getState)
-// console.log("this is the State", storeObj.getState())
+
+
 
 ReactDOM.render(
     <BrowserRouter>
-        <Provider store={storeObj}>
+        <Provider store={store}>
             <App />
         </Provider>
     </BrowserRouter>
