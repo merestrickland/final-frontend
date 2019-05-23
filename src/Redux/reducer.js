@@ -27,8 +27,8 @@ const reducer = (state = initialState, action) => {
         console.log("action", action)
           let loginInfo = {
             email: action.payload.user.email,
-            firstName: action.payload.user.first_name, 
-            lastName: action.payload.user.last_name,
+            first_name: action.payload.user.first_name, 
+            last_name: action.payload.user.last_name,
             trips: action.payload.user.trips
           }
           localStorage.setItem('token', action.payload.token)

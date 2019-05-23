@@ -48,7 +48,8 @@ return  dispatch => {
             //need logic here to have an error pop up
             console.log("try again")
         } else {
-            localStorage.setItem("token", data.jwt)
+            console.log("jwt", data.token)
+            localStorage.setItem("token", data.token)
             dispatch(loginUser(data.user))
         }
     })
@@ -81,33 +82,35 @@ export const userPostFetch = user => {
     }
 }
 
-const loginUser = userObj => ({
-    type: 'LOGIN_USER',
-    payload: userObj
-})
-
 export const getProfileFetch = () => {
     return dispatch => {
       const token = localStorage.token;
       if (token) {
-        return fetch("http://localhost:3005/api/v1/profile", {
+        return fetch("http://localhost:3005/api/v1/autologin", {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
-            Accept: 'application/json',
+            'Accept': 'application/json',
             'Authorization': `Bearer ${token}`
           }
         })
           .then(resp => resp.json())
           .then(data => {
             if (data.message) {
+                
               // An error will occur if the token is invalid.
               // If this happens, you may want to remove the invalid token.
               localStorage.removeItem("token")
             } else {
+                console.log(data.user)
               dispatch(loginUser(data.user))
             }
           })
       }
     }
   }
+
+  const loginUser = userObj => ({
+    type: 'LOGIN_USER',
+    payload: userObj
+})

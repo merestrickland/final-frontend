@@ -9,19 +9,20 @@ class ProfileContainer extends Component {
       <div>
         
         <h1>Welcome, {this.props.user.first_name}</h1>
+        <h2></h2>
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-
+  console.log("profile props", state)
   return {
-    trips: state.currentUser.trips,
-    user: state.currentUser
+    user: state.currentUser,
+    trips: state.currentUser.trips
   }
 }
 
 
-export default connect(null, actionCreators)(ProfileContainer)
+export default connect(mapStateToProps, actionCreators)(ProfileContainer)
 

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import { Route, Switch, Link } from 'react-router-dom'
 import LoginForm from '../components/LoginForm'
 import RegisterForm from '../components/RegisterForm'
 import Header from '../components/Header'
 
-export default class Home extends Component {
+class Home extends Component {
   render() {
     return (
       <div>
@@ -21,3 +22,14 @@ export default class Home extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+
+  return {
+    trips: state.currentUser.trips,
+    currentUser: state.currentUser
+  }
+}
+
+export default connect(mapStateToProps)(Home)
+
