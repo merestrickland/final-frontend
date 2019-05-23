@@ -27,10 +27,14 @@ import NavBar from './components/NavBar'
 
 class App extends Component {
 
-  // state = {
-  //   user: {},
-  //   token: ""
-  // }
+  state = {
+    user: {},
+    token: ""
+  }
+
+    // componentDidMount = () => {
+    //   this.props.getProfileFetch()
+    // }
 
    setUser = (userInformation, token) => {
     this.setState({
@@ -51,7 +55,7 @@ class App extends Component {
             <Route path="/home" component={Home} />
             <Route path='/login' render={()=> <LoginForm setUser={this.setUser}/> } />
             <Route path="/signup" render={()=> <RegisterForm /> } />
-            <Route path="/profile" render={()=> <ProfileContainer user={this.state.currentUser} token={this.state.token} /> } />
+            <Route path="/profile" render={()=> <ProfileContainer user={this.props.currentUser} token={this.props.token} /> } />
             <Route path="/trips" component={TripContainer} />
             <Route exact path="/users" component={UserSearch} />
             <Route exact path="/users/:id" component={UserShow} />
@@ -67,6 +71,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
 
+  currentUser: state.currentUser
 })
 
 export default connect(mapStateToProps)(App);

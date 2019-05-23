@@ -1,19 +1,12 @@
 
-// const initialState = {
-//   id: '',
-//   first_name: '',
-//   last_name: '',
-//   email: '',
-//   token: '',
-//   trips: []
-// }
+
 
 const initialState = {
   trips: [],
   users: [],
   filteredUsers: [],
   currentUser: {},
-  token: ''
+  token: '',
 }
 
 
@@ -27,9 +20,11 @@ const reducer = (state = initialState, action) => {
           return {...state, users: action.payload}
         case 'FILTER_USERS':
           return {...state, filteredUsers: action.payload}
+        case 'LOGIN_USER':
+          return {...state, currentUser: action.payload}
         case 'LOGIN':
-        // debugger;
-        console.log(action)
+       
+        console.log("action", action)
           let loginInfo = {
             email: action.payload.user.email,
             firstName: action.payload.user.first_name, 

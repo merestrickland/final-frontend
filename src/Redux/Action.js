@@ -31,22 +31,83 @@ export const filterUsers = (users) => ({
     payload: users
 })
 
-export const fetchLogin = (currentUser) => dispatch => {
-    const user = {user:{
-        email: currentUser.email.toLowerCase(),
-        password: currentUser.password
-      }}
-    fetch("http://localhost:3005/api/v1/login", {
+export const fetchLogin = user => {
+
+return  dispatch => {
+    return fetch("http://localhost:3005/api/v1/login", {
         method: "POST",
         headers: {
             'content-type': 'application/json',
-            'accept': "application/json",
+            'accept': 'application/json'
         },
-        body: JSON.stringify(user)
+        body: JSON.stringify({user})
     })
     .then(response => response.json())
-    .then((response) => {
-        console.log(response)
-        dispatch({type: "LOGIN", payload: response})
+    .then(data => {
+        if (data.message) {
+            //need logic here to have an error pop up
+            console.log("try again")
+        } else {
+            localStorage.setItem("token", data.jwt)
+            dispatch(loginUser(data.user))
+        }
     })
 }
+}
+
+export const userPostFetch = user => {
+    //this function will send user's info to backend to be verified
+    //upon success, expects a JSON object to be returned with user info and jwt
+    return dispatch => {
+        return fetch("http://localhost:3005/api/v1/users", {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json',
+                'accept': 'application/json'
+            },
+            body: JSON.stringify({user})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                //need logic here to have an error pop up
+                console.log("try again")
+            } else {
+                console.log("this is the user obj", data)
+                localStorage.setItem("token", data.jwt)
+                dispatch(loginUser(data.user))
+            }
+        })
+    }
+}
+
+const loginUser = userObj => ({
+    type: 'LOGIN_USER',
+    payload: userObj
+})
+
+export const getProfileFetch = () => {
+    return dispatch => {
+      const token = localStorage.token;
+      if (token) {
+        return fetch("http://localhost:3005/api/v1/profile", {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            if (data.message) {
+              // An error will occur if the token is invalid.
+              // If this happens, you may want to remove the invalid token.
+              localStorage.removeItem("token")
+            } else {
+              dispatch(loginUser(data.user))
+            }
+          })
+      }
+    }
+  }
