@@ -23,11 +23,14 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ui body {
+  background-color: black;
+}
+
+div.ui.menu {
+  background-color:#e34522;
+}
+
+div .ui.teal.card {
+  background-color:#cae7ee;
 }

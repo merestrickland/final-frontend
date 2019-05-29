@@ -3,8 +3,10 @@ import Trip from '../components/Trip'
 import TripShow from '../components/TripShow'
 // import TripForm from '../components/TripForm'
 import {connect} from 'react-redux'
-import {Link, Switch, Route} from 'react-router-dom'
+import {Switch, Route} from 'react-router-dom'
 import * as actionCreators from '../Redux/Action'
+import { Card, Icon, Image } from 'semantic-ui-react'
+import NavBar from '../components/NavBar'
 
 
 
@@ -18,9 +20,10 @@ class TripContainer extends Component {
     console.log('trip props', this.props)
     return (
       <div>
+        <NavBar />
         <Switch>
           <Route path="/trips/:id" render={(props) => {
-            console.log("these are render props", props)
+            
            
             //find the trip from props based on id
             const foundTrip = this.props.trips.find(trip => {
@@ -41,10 +44,18 @@ class TripContainer extends Component {
             return (
               <div>
                 <h1>Trip Container</h1>
-                {this.props.trips.map(trip => 
-                  <Trip trip={trip}/>
+                <Card.Group itemsPerRow={3}>
+                  {this.props.trips.map(trip => 
+                    <Card color='teal'>
+                      <Card.Header><Trip trip={trip}/></Card.Header>
+                      <Card.Content>
+                        <Card.Description> {trip.location.name} </Card.Description>
+                      </Card.Content>
+                    </Card>
                 )}
+                </Card.Group>
               </div>
+              
             )
           }}/>
         </Switch>
