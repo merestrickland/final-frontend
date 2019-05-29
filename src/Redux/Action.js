@@ -119,9 +119,6 @@ export const setCurrentUserTrips = (newTripObject) => {
     return {type: 'SET_USER_TRIPS', payload: newTripObject}
 }
 
-export const removeTrip = (tripId) => {
-    return {type: 'REMOVE_TRIP', payload: tripId}
-}
 
 export const postTripRequest = (tripObject) => {
     return (dispatch) => {
@@ -135,7 +132,34 @@ export const postTripRequest = (tripObject) => {
                 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(tripObject)
-        }).then(r => r.json())
-            .then(data => console.log('this is data from postTripRequest: ', data))
+        })
+        .then(response => response.json())
+        .then(tripArr => dispatch(setCurrentUserTrips(tripArr)))
     }
 }
+
+
+export const removeTrip = (tripObjId) => {
+    console.log('removeTrip tripObj', tripObjId)
+    return {type: 'REMOVE_TRIP', payload: tripObjId}
+}
+
+export const removeTripRequest = (tripId) => {
+    return (dispatch) => {
+        const token = localStorage.token
+        console.log('tripObj in removeTripRequest', tripId)
+        return fetch(`http://localhost:3005/api/v1/trips/${tripId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(response => response.json())
+        .then(console.log)
+        // .then(tripObj => dispatch(removeTrip(tripObj)))
+    }
+}
+
+// dispatch(newTrip(tripArr))

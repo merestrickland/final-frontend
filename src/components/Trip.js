@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom'
 import { Icon } from 'semantic-ui-react'
-import { removeTrip } from '../Redux/Action'
+import { removeTripRequest, removeTrip } from '../Redux/Action'
 import {setCurrentUserTrips} from '../Redux/Action'
 
 
@@ -13,6 +13,7 @@ class Trip extends Component {
   handleClick = () => {
     console.log('handle click props', this.props.trip.id)
     this.props.removeTrip(this.props.trip.id)
+    this.props.removeTripRequest(this.props.trip.id)
   }
 
 
@@ -51,5 +52,5 @@ class Trip extends Component {
 // }
 
 
-export default connect(null, {removeTrip})(Trip)
+export default connect(null, {removeTripRequest, removeTrip})(Trip)
 
