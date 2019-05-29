@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {Link, Switch, Route} from 'react-router-dom'
 import * as actionCreators from '../Redux/Action'
+import NavBar from '../components/NavBar'
 
 class UserSearch extends Component {
 
@@ -25,9 +26,13 @@ class UserSearch extends Component {
 
   render() {
 
+    
+
     console.log('user search props', this.props)
       return (
+        
         <div>
+          <NavBar />
           <input onChange={this.handleChange} style={{ width: 500, height: 35,     borderRadius: '100px'}} type="text"
             placeholder={"Search for a User"}/>
         {this.props.filteredUsers.map(user => {
@@ -36,21 +41,16 @@ class UserSearch extends Component {
               <Switch>
               {/* <Route path */}
               <Route path="/users" render={(props) => {
+                  console.log('render props', props)
                    return (
                     <Link to={`/users/${user.id}`}>
                     <h2>{user.first_name}</h2>
+
                     </Link>
                    )     
               }}/>
               </Switch>
             </div>
-
-
-
-
-
-
-           
           )
         })}
         

@@ -2,11 +2,12 @@
 
 
 const initialState = {
-  trips: [],
+  // trips: [],
   users: [],
   filteredUsers: [],
   currentUser: {},
-  token: '',
+  currentUserTrips: [],
+  token: ''
 }
 
 
@@ -14,12 +15,22 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'GET_TRIPS': 
-          return {...state, trips: action.payload}
+        // case 'GET_TRIPS': 
+        //   return {...state, trips: action.payload}
+          //This is supposed to take the current users trips, and set them to their own state. 
+        case 'SET_USER_TRIPS':
+        console.log(state.currentUserTrips)
+          return {...state, currentUserTrips: [...state.currentUserTrips, action.payload]}
+        case 'REMOVE_TRIP':
+          let idOfTripToRemove = action.payload 
+          let filteredArray = state.trips.filter(trip => trip.id !== idOfTripToRemove)
+          return {...state, trips: filteredArray}
         case 'GET_USERS':
           return {...state, users: action.payload}
         case 'FILTER_USERS':
           return {...state, filteredUsers: action.payload}
+        case 'USER_SHOW':
+          return {...state, userShow: action.payload}
         case 'LOGIN_USER':
           return {...state, currentUser: action.payload}
         case 'LOGIN':

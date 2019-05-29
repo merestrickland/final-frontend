@@ -114,3 +114,28 @@ export const getProfileFetch = () => {
     type: 'LOGIN_USER',
     payload: userObj
 })
+
+export const setCurrentUserTrips = (newTripObject) => {
+    return {type: 'SET_USER_TRIPS', payload: newTripObject}
+}
+
+export const removeTrip = (tripId) => {
+    return {type: 'REMOVE_TRIP', payload: tripId}
+}
+
+export const postTripRequest = (tripObject) => {
+    return (dispatch) => {
+        const token = localStorage.token
+        console.log(tripObject)
+        return fetch('http://localhost:3005/api/v1/trips', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(tripObject)
+        }).then(r => r.json())
+            .then(data => console.log('this is data from postTripRequest: ', data))
+    }
+}

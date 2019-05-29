@@ -9,8 +9,9 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './Redux/reducer'
 
+import 'semantic-ui-css/semantic.min.css'
+// import { Grid } from 'semantic-ui-react'
 
-// import semantic-ui-css/semantic.min.css
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = [thunk]
@@ -18,6 +19,8 @@ const store = createStore(
   reducer, composeEnhancers(
     applyMiddleware(...middleware)
   ));
+
+export default store;
 
 
 

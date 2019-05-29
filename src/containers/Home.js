@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { Route, Switch, Link } from 'react-router-dom'
-import LoginForm from '../components/LoginForm'
-import RegisterForm from '../components/RegisterForm'
+import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 
 class Home extends Component {
