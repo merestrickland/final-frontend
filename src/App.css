@@ -35,6 +35,10 @@ button.ui.primary.button {
   background-color: #e34522
 }
 
+i.trash.alternate.outline.link.icon {
+  margin: .25em .25em .50em .50em
+}
+
 /* div .ui.teal.card {
   background-color:#cae7ee;
 } */
@@ -45,4 +49,12 @@ button.ui.button {
 
 body.ui.body {
   background-color:#cae7ee;
+}
+
+h1.center {
+  text-align: center;
+}
+
+h3.triplocation {
+  text-align: center;
 }
