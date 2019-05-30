@@ -58,13 +58,5 @@ import { Input } from "semantic-ui-react";
   }
 
 
-
- //return value will get merged into props
-//  const mapDispatchToProps = (dispatch) => {
-//     return {
-//         addTrip: (newTripObject) => {dispatch( {type: "ADD_TRIP", payload: newTripObject} )}
-//     }
-//  }
-
  export default connect(mapStateToProps, { postTripRequest })(TripForm);
  

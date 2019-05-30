@@ -25,10 +25,10 @@ class TripShow extends Component {
 
 
   render() {
-    console.log("trip show props", this.props)
+    // console.log("trip show props", this.props)
     // this.props.setTrip(this.props.passedTrip)
     const trip = this.props.trip
-    console.log('this is trip', trip)
+    // console.log('this is trip', trip)
     
     //set trip to current Trip in Store
 
@@ -52,16 +52,11 @@ class TripShow extends Component {
               <Image wrapped size='medium' src={item.img_url} />
               <Modal.Description>
                   <Header>{item.description}</Header>
+                  <h3>{item.category}</h3>
               </Modal.Description>
               <Button onClick={() => {this.handleClick(item)}}><Icon link name='trash alternate outline' /></Button>
               </Modal.Content>
             </Modal>
-
-
-
-            
-
-            
             
           )
         })}
