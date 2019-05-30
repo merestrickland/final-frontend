@@ -28,7 +28,7 @@ class Trip extends Component {
         <div>
           <Icon link name='close' color='red' onClick={this.handleClick}/>
           <Link to={`/trips/${trip.id}`}>
-            <h1>{trip.name}</h1>
+            <h1 class='trip card'>{trip.name}</h1>
           </Link>
         </div>
     )

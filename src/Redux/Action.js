@@ -1,4 +1,7 @@
-
+export const setTrip = (tripObj) => ({
+    type: 'SET_TRIP',
+    payload: tripObj
+})
 
 export const getTrips = (tripArr) => ({
     type: "GET_TRIPS",
@@ -157,9 +160,56 @@ export const removeTripRequest = (tripId) => {
             }
         })
         .then(response => response.json())
-        .then(console.log)
+        // .then(console.log)
         // .then(tripObj => dispatch(removeTrip(tripObj)))
     }
 }
 
-// dispatch(newTrip(tripArr))
+export const addListItem = (newListObject) => {
+    return {type: 'ADD_LIST_ITEM', payload: newListObject}
+}
+
+export const postListItemRequest = (listObject) => {
+    return (dispatch) => {
+        const token = localStorage.token 
+        
+        return fetch(`http://localhost:3005/api/v1/list_items`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(listObject)
+        })
+        .then(response => response.json())
+        .then(listItemArr => dispatch(addListItem(listItemArr)))
+    }
+}
+
+export const removeListItem = (listObj) => {
+    console.log('removeListItem listObj', listObj)
+    return {type: 'REMOVE_LIST_ITEM', payload: listObj.id}
+}
+
+
+export const removeListItemRequest = (listObj) => {
+    return (dispatch) => {
+        const token = localStorage.token
+        console.log('listObj in removeTripRequest', listObj)
+        return fetch(`http://localhost:3005/api/v1/list_items/${listObj.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(response => response.json())
+        // .then(console.log)
+        // .then(listObj => dispatch(removeListItem(listObj)))
+    }
+}
+
+
+

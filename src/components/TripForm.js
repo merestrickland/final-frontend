@@ -25,6 +25,10 @@ import { Input } from "semantic-ui-react";
         // console.log('submitted!')
         let newTripObject = {...this.state, user_id: this.props.user.id}
         this.props.postTripRequest(newTripObject)
+        this.setState({
+          name: '',
+          location: ''
+        })
     }
 
    
@@ -32,7 +36,7 @@ import { Input } from "semantic-ui-react";
 
    render() {
     //    console.log(this.state)
-       console.log('props', this.props)
+      //  console.log('props', this.props)
      return (
         
         <form onSubmit={this.handleSubmit}>

@@ -7,6 +7,7 @@ import {Switch, Route} from 'react-router-dom'
 import * as actionCreators from '../Redux/Action'
 import { Card, Icon, Image } from 'semantic-ui-react'
 import NavBar from '../components/NavBar'
+import { setTrip } from '../Redux/Action'
 
 
 
@@ -34,8 +35,11 @@ class TripContainer extends Component {
               props.history.push("/")
               return 
             } else {
+              //setting selected trip here
+              this.props.setTrip(foundTrip)
+
               return ( 
-                  <TripShow trip={foundTrip}/>  
+                  <TripShow passedTrip={foundTrip}/>  
               )
             }
           }} />
