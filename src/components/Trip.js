@@ -19,13 +19,14 @@ class Trip extends Component {
 
 
   render(){
-    
+    console.log('TripCard props', this.props)
   
     let trip = this.props.trip
-
+    // console.log('trip', trip)
     return (
        
         <div>
+          {/* {this.props.currentUser.id === this.props.tripUserId ? <Icon link name='close' color='red' onClick={this.handleClick}/> : null} */}
           <Icon link name='close' color='red' onClick={this.handleClick}/>
           <Link to={`/trips/${trip.id}`}>
             <h1 class='trip card'>{trip.name}</h1>
@@ -35,14 +36,14 @@ class Trip extends Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   // console.log(state.users)
-//   return {
-//     users: state.users,
-//     trips: state.trips
+const mapStateToProps = (state) => {
+  // console.log(state.users)
+  return {
+    currentUser: state.currentUser,
+    
 
-//   }
-// }
+  }
+}
 
 
 // const mapDispatchToProps = (dispatch) => {
@@ -52,5 +53,5 @@ class Trip extends Component {
 // }
 
 
-export default connect(null, {removeTripRequest, removeTrip})(Trip)
+export default connect(mapStateToProps, {removeTripRequest, removeTrip})(Trip)
 

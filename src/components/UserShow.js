@@ -44,8 +44,9 @@ class UserShow extends Component {
 
   
   render() {
-    
+    console.log('userShow props', this.props)
     let userShowId = this.props.match.params.id
+    //if parseInt(userShowId) === this.props.currentUser.id
 
     let userList = [...this.props.users.users]
     const showThisUser = userList.find(user => {
@@ -70,7 +71,7 @@ class UserShow extends Component {
           <Card.Group itemsPerRow={3}>
                   {showThisUser.trips.map(trip => 
                     <Card color='teal'>
-                      <Card.Header><Trip trip={trip}/></Card.Header>
+                      <Card.Header><Trip tripUserId={parseInt(userShowId)}trip={trip}/></Card.Header>
                       <Card.Content>
                         <Card.Description>{trip.location} </Card.Description>
                       </Card.Content>

@@ -27,24 +27,23 @@ class TripShow extends Component {
   render() {
     // console.log("trip show props", this.props)
     // this.props.setTrip(this.props.passedTrip)
+    //sets trip to current Trip in Store
     const trip = this.props.trip
     // console.log('this is trip', trip)
+    const thingsToDo = trip.list_items.filter(item => item.category === 'activity')
+    const thingsToEat = trip.list_items.filter(item => item.category === 'eating')
+    const thingsToDrink = trip.list_items.filter(item => item.category === 'drinking')
     
-    //set trip to current Trip in Store
 
     return (
       <div>
-        <h1>{trip.name}</h1>
-        <h3>{trip.location}</h3>
-        {trip.list_items.map(item => {
+        <h1 class="center">{trip.name}</h1>
+        <h3 class="triplocation">{trip.location}</h3>
+
+        <h4>Things To Do</h4>
+        {thingsToDo.map(item => {
           return (
-            // <div>
-            // <h3>{item.name}</h3>
-            // <p>{item.description}</p>
-            // <img alt={item.name} src={item.img_url}/>
-            // </div>
-            
-            
+          
             
             <Modal trigger={<Button>{item.name}</Button>}>
               <Modal.Header>{item.name}</Modal.Header>
@@ -52,14 +51,58 @@ class TripShow extends Component {
               <Image wrapped size='medium' src={item.img_url} />
               <Modal.Description>
                   <Header>{item.description}</Header>
-                  <h3>{item.category}</h3>
               </Modal.Description>
-              <Button onClick={() => {this.handleClick(item)}}><Icon link name='trash alternate outline' /></Button>
+              
               </Modal.Content>
+              <Icon link name='trash alternate outline' onClick={() => {this.handleClick(item)}} />
             </Modal>
-            
           )
         })}
+
+        <h4>Things To Eat</h4>
+        {thingsToEat.map(item => {
+          return (
+          
+            
+            <Modal trigger={<Button>{item.name}</Button>}>
+              <Modal.Header>{item.name}</Modal.Header>
+              <Modal.Content image>
+              <Image wrapped size='medium' src={item.img_url} />
+              <Modal.Description>
+                  <Header>{item.description}</Header>
+                 
+              </Modal.Description>
+              
+              </Modal.Content>
+              <Icon link name='trash alternate outline' onClick={() => {this.handleClick(item)}} />
+            </Modal>
+          )
+        })}
+
+        <h4>Things To Drink</h4>
+        {thingsToDrink.map(item => {
+          return (
+          
+            
+            <Modal trigger={<Button>{item.name}</Button>}>
+              <Modal.Header>{item.name}</Modal.Header>
+              <Modal.Content image>
+              <Image wrapped size='medium' src={item.img_url} />
+              <Modal.Description>
+                  <Header>{item.description}</Header>
+              </Modal.Description>
+              
+              </Modal.Content>
+              <Icon link name='trash alternate outline' onClick={() => {this.handleClick(item)}} />
+            </Modal>
+          )
+        })}
+
+
+
+
+
+
         <div>
         <ListForm trip={trip}/>
         </div>
