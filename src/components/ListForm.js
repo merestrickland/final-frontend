@@ -23,27 +23,33 @@ class ListForm extends Component {
     close = () => this.setState({ open: false });
     
 
-   handleChange = (event) => {
-     console.log('listForm props', this.props)
-       this.setState({
-           [event.target.name]: event.target.value,
+  //  handleChange = (event) => {
+  //    console.log('listForm props', this.props)
+  //      this.setState({
+  //          [event.target.name]: event.target.value,
       
-       })
-   }
+  //      })
+  //  }
+
+  handleChange = (e, { name, value }) => 
+    this.setState({ [name]:   value })
 
    handleSubmit = (event) => {
        event.preventDefault()
-       console.log('userid', this.props.user.id)
-       let newListItem = {...this.state, user_id: this.props.user.id, trip_id: this.props.trip.id}
-       console.log(newListItem)
-       this.props.postListItemRequest(newListItem)
+      
        this.setState({
         name: '',
         description: '',
         img_url: '',
-       //  category: '',
+        category: '',
         open: false
        })
+       let newListItem = {...this.state, user_id: this.props.user.id, trip_id: this.props.trip.id}
+
+       console.log('new list item', newListItem)
+       
+       this.props.postListItemRequest(newListItem)
+
    }
 
 
@@ -54,24 +60,27 @@ class ListForm extends Component {
 
   render() {
  
-      console.log('props', this.props)
+      // console.log('props', this.props)
 
 
       let categoryOptions = [
         {
           key: 'activity',
           text: 'activity',
-          value: 'activity'
+          value: 'activity',
+          name: 'activity'
         },
         {
          key: 'eating',
          text: 'eating',
-         value: 'eating'
+         value: 'eating',
+         name: 'eating'
        },
        {
         key: 'drinking',
         text: 'drinking',
-        value: 'drinking'
+        value: 'drinking',
+        name: 'drinking'
       }]
 
 
@@ -90,14 +99,13 @@ class ListForm extends Component {
 
                     <TextArea type="text" name="img_url" placeholder="Image URL" value={this.state.img_url} onChange={this.handleChange}/>
 
-                    {/* <Dropdown
+                    <Dropdown
                     placeholder='Select Category'
                     fluid
                     selection
                     options={categoryOptions}
                     name="category"
-                    // value={this.state.category}
-                    onChange={this.dropDownVal}/> */}
+                    onChange={this.handleChange}/>
                     
                     <Input type="submit" />
 
