@@ -23,14 +23,26 @@
   color: #61dafb;
 }
 
-.ui body {
+/* .ui body {
   background-color: black;
-}
+} */
 
 div.ui.menu {
   background-color:#e34522;
 }
 
-div .ui.teal.card {
+button.ui.primary.button {
+  background-color: #e34522
+}
+
+/* div .ui.teal.card {
+  background-color:#cae7ee;
+} */
+
+button.ui.button {
+  margin: .25em .25em .25em .25em
+}
+
+body.ui.body {
   background-color:#cae7ee;
 }

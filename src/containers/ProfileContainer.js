@@ -13,10 +13,10 @@ class ProfileContainer extends Component {
     this.props.getTripsCreator();
     console.log("current user", this.props)
     // this.props.setCurrentUserTrips(this.props.user.trips)
-    if (this.props.user.trips) {
-      console.log('hello', this.props.user.trips)
-      this.props.user.trips.forEach(trip => this.props.setCurrentUserTrips(trip))
-    }
+    // if (this.props.user.trips) {
+    //   console.log('hello', this.props.user.trips)
+    //   // this.props.user.trips.forEach(trip => this.props.setCurrentUserTrips(trip))
+    // }
   }
 
 

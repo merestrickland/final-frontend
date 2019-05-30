@@ -28,8 +28,8 @@ class LoginForm extends Component {
     }
 
     handleSubmit = (event) => {
-        console.log("handle submit props", this.props)
-        console.log("handle submit state", this.state)
+        // console.log("handle submit props", this.props)
+        // console.log("handle submit state", this.state)
         event.preventDefault()
         this.props.fetchLogin(this.state)
         this.props.history.push('/profile')
