@@ -23,16 +23,25 @@ class Trip extends Component {
   
     let trip = this.props.trip
     // console.log('trip', trip)
-    return (
-       
-        <div>
-          {/* {this.props.currentUser.id === this.props.tripUserId ? <Icon link name='close' color='red' onClick={this.handleClick}/> : null} */}
-          <Icon link name='close' color='red' onClick={this.handleClick}/>
+
+    if(this.props.tripUserId){
+      return (<div>
+        {this.props.currentUser.id === this.props.tripUserId ? <Icon link name='close' color='red' onClick={this.handleClick}/> : null}
+        <Link to={`/trips/${trip.id}`}>
+            <h1 class='trip card'>{trip.name}</h1>
+          </Link>
+      </div>
+      )
+    } else {
+      return(<div>
+        <Icon link name='close' color='red' onClick={this.handleClick}/>
           <Link to={`/trips/${trip.id}`}>
             <h1 class='trip card'>{trip.name}</h1>
           </Link>
-        </div>
-    )
+      </div>
+        
+      )
+    }
   }
 }
 
