@@ -7,7 +7,7 @@ This project exists because of how often I have people asking for my recommendat
 ## Screenshots
 ![alt text](https://github.com/merestrickland/final-frontend/blob/master/images/TripListScreenshot.png "TripList Screenshot")
 
-![alt text](https://github.com/merestrickland/final-frontend/blob/master/images/TripList Screenshot2.png "TripList Screenshot")
+![alt text](https://github.com/merestrickland/final-frontend/blob/master/images/TripList%20Screenshot2.png "TripList Screenshot")
 
 ## Tech/framework used
 Built with React.js, Redux, and SemanticUI React
