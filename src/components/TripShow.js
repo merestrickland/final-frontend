@@ -24,12 +24,14 @@ class TripShow extends Component {
   }
 
 
+  //if currentUser.id ===
+
   render() {
     // console.log("trip show props", this.props)
     // this.props.setTrip(this.props.passedTrip)
     //sets trip to current Trip in Store
     const trip = this.props.trip
-    // console.log('this is trip', trip)
+    console.log('this is trip', trip)
     const thingsToDo = trip.list_items.filter(item => item.category === 'activity')
     const thingsToEat = trip.list_items.filter(item => item.category === 'eating')
     const thingsToDrink = trip.list_items.filter(item => item.category === 'drinking')
@@ -45,7 +47,7 @@ class TripShow extends Component {
           return (
           
             
-            <Modal trigger={<Button>{item.name}</Button>}>
+            <Modal trigger={<Button className="todo" >{item.name}</Button>} >
               <Modal.Header>{item.name}</Modal.Header>
               <Modal.Content image>
               <Image wrapped size='medium' src={item.img_url} />
@@ -64,7 +66,7 @@ class TripShow extends Component {
           return (
           
             
-            <Modal trigger={<Button>{item.name}</Button>}>
+            <Modal trigger={<Button className='toeat'>{item.name}</Button>}>
               <Modal.Header>{item.name}</Modal.Header>
               <Modal.Content image>
               <Image wrapped size='medium' src={item.img_url} />
@@ -84,7 +86,7 @@ class TripShow extends Component {
           return (
           
             
-            <Modal trigger={<Button>{item.name}</Button>}>
+            <Modal trigger={<Button className='todrink'>{item.name}</Button>}>
               <Modal.Header>{item.name}</Modal.Header>
               <Modal.Content image>
               <Image wrapped size='medium' src={item.img_url} />
