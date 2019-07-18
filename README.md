@@ -4,6 +4,9 @@ TripList is a web application that allows a user to plan trips for themselves, o
 ## Motivation
 This project exists because of how often I have people asking for my recommendations in cities they will visit. On TripList, you can search for users and easily see what items they recommend for trips they have been on.
 
+## Link to Demo Video
+https://www.youtube.com/watch?v=D8qmIOkQbvY
+
 ## Screenshots
 ![alt text](https://github.com/merestrickland/final-frontend/blob/master/images/TripListScreenshot.png "TripList Screenshot")
 
